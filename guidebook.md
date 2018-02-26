@@ -9,10 +9,7 @@ load data client side.
 
 1. Navigate to the unique instance URL provided to you.
 
-1. Log on with provided credentials. Include periods at the end of your
-    steps. Exclude the period if a step ends with text the student needs
-    to copy and paste to prevent the period from being grabbed
-    accidentally.
+1. Log on with provided credentials.
 
 ### Create List Widget
 
@@ -35,8 +32,7 @@ load data client side.
 
 1. Click the **Submit** button.
 
-1. Your Screen should look like this\
-    \
+1. Your Screen should look like this
     ![Widget Editor](./media/image4.png)
 
 ### Enter Widget Information
@@ -72,17 +68,15 @@ load data client side.
 
 ```html
 <div class="panel panel-default">
-<!-- your widget template -->
-<div class="panel-heading">
-DD18 List Widget
-</div>
-<div class="panel-body">
-<ul class="list-group">
-<li class="list-group-item" ng-repeat="item in
-c.data.list">{{item.number}} - {{item.short_description}} -
-{{item.priority}}</li>
-</ul>
-</div>
+    <!-- your widget template -->
+    <div class="panel-heading">
+        DD18 List Widget
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in c.data.list">{{item.number}} - {{item.short_description}} - {{item.priority}}</li>
+        </ul>
+<   /div>
 </div>
 ```
 
@@ -334,7 +328,7 @@ In this lab we will define options for our widget
 
 - Label: Query
 - Name: query
-- Type:string
+- Type: String
 - Default Value: leave empty
 
 1. Click on the ![Plus](./media/image10.png) icon in the top right corner on of
@@ -344,7 +338,7 @@ In this lab we will define options for our widget
 
 - Label: Template
 - Name: template
-- Type:string
+- Type: String
 - Default Value: leave empty
 
 1. Click **Save**
@@ -396,11 +390,11 @@ ng-include="c.data.template"></li>
 
 1. Select Instance Options
 
-![k17_list_widget generated](./media/image12.png)
+![dd18_list_widget generated](./media/image12.png)
 
 1. Enter the following information
 
-![K17 List Widget](./media/image13.png)
+![dd18 List Widget](./media/image13.png)
 
 1. Click **Save**
 
@@ -417,7 +411,7 @@ automatically updated without having to refresh the page
 
 ### Set up record watcher
 
-1. Open the k17_list_widget using the widget editor.
+1. Open the dd18_list_widget using the widget editor.
 
 1. Modify the Client Script to look like this:
 
@@ -449,7 +443,7 @@ function($scope,$http,snRecordWatcher) {
 1. Click **Save**
 
 1. Navigate to [your instance]
-    .service-now.com/sp_config/?id=k17_list_widget
+    .service-now.com/sp_config/?id=dd18_list_widget
 
 1. How Many Changes are displayed?
 
@@ -461,11 +455,11 @@ function($scope,$http,snRecordWatcher) {
 
 ## Goal
 
-In this lab we will modify our widget to boradcast an event and have another widget receive that event.
+In this lab we will modify our widget to broadcast an event and have another widget receive that event.
 
 ### Set up event
 
-1. Open the k17_list_widget using the widget editor.
+1. Open the dd18_list_widget using the widget editor.
 
 1. Modify the Client Script to look like this:
 
@@ -482,7 +476,7 @@ function($scope,$http,snRecordWatcher,$rootScope) {
         $http.get('/api/now/table/'+c.data.table+'?sysparm_query='+c.data.query).success(function(response){
             c.data.loading=false;
             c.data.list = response.result;
-            $rootScope.$broadcast("K17ListWidgetUpdated",c.data.list);
+            $rootScope.$broadcast("DD18ListWidgetUpdated",c.data.list);
         })
     }
 
@@ -503,8 +497,8 @@ function($scope,$http,snRecordWatcher,$rootScope) {
 
 1. Enter the following information:
 
-- Widget Name: k17_count_display_widget
-- Widget ID: k17_count_display_widget
+- Widget Name: dd18_count_display_widget
+- Widget ID: dd18_count_display_widget
 
 1. Click Submit
 
@@ -526,7 +520,7 @@ function($scope) {
     /*widget controller */
     var c = this;
     c.data.count = 0;
-    $scope.$on("K17ListWidgetUpdated",function(evt,results){
+    $scope.$on("DD18ListWidgetUpdated",function(evt,results){
         console.log(results)
         c.data.count = results.length;
     })
@@ -538,17 +532,19 @@ function($scope) {
 1. Click on the **Designer** Option in widget header menu
     ![Designer](./media/image16.png)
 
-1. Use the filter to look for k17_list_widget Test Page
+1. Use the filter to look for dd18_list_widget Test Page
 
 1. Select the Page
 
-1. Use the filter to search for k17_count_display_widget
+1. Use the filter to search for dd18_count_display_widget
 
     ![Filter](./media/image17.png)
 
-1. Drag and drop k17_count_display_widget above the k17 List Widget
+1. Drag and drop dd18_count_display_widget above the dd18 List Widget
 
 1. Navigate to [your instance]
-    .service-now.com/sp_config/?id=k17_list_widget
+    .service-now.com/sp_config/?id=dd18_list_widget
 
 1. Is the count of records populating?
+
+1. Create another new Change Request record. Does the change reflect in both your list and the count widget? If not, try to troubleshoot the issue.
