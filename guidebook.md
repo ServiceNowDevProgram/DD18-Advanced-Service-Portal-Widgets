@@ -25,13 +25,13 @@ load data client side.
 [Create Widget](./media/image3.png)
 4.  Enter the following information:
 
-- Widget Name: k17_list_widget
+- Widget Name: dd18_list_widget
 
-- Widget ID: k17_list_widget
+- Widget ID: dd18_list_widget
 
 - Create Test Page: checked
 
-- Page Id: k17_list_widget
+- Page Id: dd18_list_widget
 
 1. Click the **Submit** button.
 
@@ -45,44 +45,26 @@ load data client side.
 
 ```javascript
 (function () {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
 
-/* populate the 'data' object */
+    //define the variable to hold our list
+    data.list = [];
 
-/* e.g., data.table = $sp.getValue('table'); */
-
-//define the variable to hold our list
-
-data.list = [];
-
-//Query the table
-
-var gr = new GlideRecord('incident');
-
-gr.addQuery('active', true);
-
-gr.query()
-
-while (gr.next()) {
-
-//load values into object
-
-var record_obj = {};
-
-record_obj.number = gr.number.getDisplayValue();
-
-record_obj.short_description =
-gr.short_description.getDisplayValue();
-
-record_obj.priority = gr.priority.getDisplayValue();
-
-record_obj.category = gr.category.getDisplayValue();
-
-//add object to the list
-
-data.list.push(record_obj);
-
-}
-
+    //Query the table
+    var gr = new GlideRecord('incident');
+    gr.addQuery('active', true);
+    gr.query()
+    while (gr.next()) {
+        //load values into object
+        var record_obj = {};
+        record_obj.number = gr.number.getDisplayValue();
+        record_obj.short_description = gr.short_description.getDisplayValue();
+        record_obj.priority = gr.priority.getDisplayValue();
+        record_obj.category = gr.category.getDisplayValue();
+        //add object to the list
+        data.list.push(record_obj);
+    }
 })();
 ```
 
@@ -90,31 +72,24 @@ data.list.push(record_obj);
 
 ```html
 <div class="panel panel-default">
-
 <!-- your widget template -->
 <div class="panel-heading">
-K17 List Widget
+DD18 List Widget
 </div>
-
 <div class="panel-body">
-
 <ul class="list-group">
-
 <li class="list-group-item" ng-repeat="item in
 c.data.list">{{item.number}} - {{item.short_description}} -
 {{item.priority}}</li>
-
 </ul>
-
 </div>
-
 </div>
 ```
 
 1. Click **Save**
 
 1. Navigate to [your instance]
-    .service-now.com/sp_config/?id=k17_list_widget and check your
+    .service-now.com/sp_config/?id=dd18_list_widget and check your
     results
 
     ![Widget list view](./media/image5.png)
@@ -127,48 +102,27 @@ c.data.list">{{item.number}} - {{item.short_description}} -
 
 ```javascript
 (function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
 
-/* populate the 'data' object */
-
-/* e.g., data.table = $sp.getValue('table'); */
-
-if(input){
-
-//define the variable to hold our list
-
-data.list = [];
-
-//Query the table
-
-var gr = new GlideRecord('incident');
-
-gr.addQuery('active', true);
-
-gr.query()
-
-while (gr.next()) {
-
-//load values into object
-
-var record_obj = {};
-
-record_obj.number = gr.number.getDisplayValue();
-
-record_obj.short_description =
-gr.short_description.getDisplayValue();
-
-record_obj.priority = gr.priority.getDisplayValue();
-
-record_obj.category = gr.category.getDisplayValue();
-
-//add object to the list
-
-data.list.push(record_obj);
-
-}
-
-}
-
+    if(input){
+        //define the variable to hold our list
+        data.list = [];
+        //Query the table
+        var gr = new GlideRecord('incident');
+        gr.addQuery('active', true);
+        gr.query()
+        while (gr.next()) {
+            //load values into object
+            var record_obj = {};
+            record_obj.number = gr.number.getDisplayValue();
+            record_obj.short_description = gr.short_description.getDisplayValue();
+            record_obj.priority = gr.priority.getDisplayValue();
+            record_obj.category = gr.category.getDisplayValue();
+            //add object to the list
+            data.list.push(record_obj);
+        }
+    }
 })();
 ```
 
@@ -176,19 +130,12 @@ data.list.push(record_obj);
 
 ```javascript
 function($scope) {
-
-/*widget controller */
-
-var c = this;
-
-c.data.loading = true;
-
-$scope.server.update().then(function(){
-
-c.data.loading = false;
-
-})
-
+    /*widget controller */
+    var c = this;
+    c.data.loading = true;
+    $scope.server.update().then(function(){
+        c.data.loading = false;
+    })
 }
 ```
 
@@ -196,39 +143,26 @@ c.data.loading = false;
 
 ```html
 <div class="panel panel-default">
-
 <!-- your widget template -->
-
-<div class="panel-heading">
-
-K17 List Widget
-
-</div>
-
-<div class="panel-body">
-
-<span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x
+    <div class="panel-heading">
+    DD18 List Widget
+    </div>
+    <div class="panel-body">
+        <span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x
 fa-fw"></i>
-
-<span class="sr-only">Loading\...</span></span>
-
-<ul class="list-group">
-
-<li class="list-group-item" ng-repeat="item in
-c.data.list">{{item.number}} - {{item.short_description}} -
-{{item.priority}}</li>
-
-</ul>
-
-</div>
-
+        <span class="sr-only">Loading\...</span>
+        </span>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in c.data.list">{{item.number}} - {{item.short_description}} -{{item.priority}}</li>
+        </ul>
+    </div>
 </div>
 ```
 
 1. Click **Save**
 
 1. Navigate to [your instance]
-    .service-now.com/sp_config/?id=k17_list_widget and check your
+    .service-now.com/sp_config/?id=dd18_list_widget and check your
     results
 
 # REST API
@@ -239,17 +173,14 @@ In this lab we will modify our list widget to make use of the REST API.
 
 ### Modify List Widget
 
-1. Navigate to the widget editor and open the k17_list_widget.
+1. Navigate to the widget editor and open the dd18_list_widget.
 
 1. Modify the Server Script to look like this
 
 ```javascript
 (function() {
-
-/*populate the 'data' object */
-
-/*e.g., data.table = $sp.getValue('table'); */
-
+    /*populate the 'data' object */
+    /*e.g., data.table = $sp.getValue('table'); */
 })();
 ```
 
@@ -257,28 +188,21 @@ In this lab we will modify our list widget to make use of the REST API.
 
 ```javascript
 function($scope,$http) {
+    /*widget controller */
+    var c = this;
+    c.data.loading = true;
 
-/*widget controller */
-
-var c = this;
-
-c.data.loading = true;
-
-$http.get('/api/now/table/incident?sysparm_query=active%3Dtrue').success(function(response){
-
-c.data.loading=false;
-
-c.data.list = response.result;
-
-})
-
+   $http.get('/api/now/table/incident?sysparm_query=active%3Dtrue').success(function(response){
+        c.data.loading=false;
+        c.data.list = response.result;
+    })
 }
 ```
 
 1. Click **Save**
 
 1. Navigate to [your instance]
-    .service-now.com/sp_config/?id=k17_list_widget and check your
+    .service-now.com/sp_config/?id=dd18_list_widget and check your
     results
 
 # NG Template
@@ -291,7 +215,7 @@ In this lab we create 2 ng templates to be used by our widgets
 
 1. Navigate to Service Portal > Widgets
 
-1. Open the k17_list_widget.
+1. Open the dd18_list_widget.
 
 1. Scroll to the bottom and select the Angular **ng-templates** tab
 
@@ -300,7 +224,6 @@ In this lab we create 2 ng templates to be used by our widgets
 1. Enter the following information
 
 - ID: task-priority
-
 - Template:
 
 ```html
@@ -317,7 +240,6 @@ In this lab we create 2 ng templates to be used by our widgets
 1. Enter the following information
 
 - ID: task-category
-
 - Template:
 
 ```html
@@ -329,47 +251,39 @@ In this lab we create 2 ng templates to be used by our widgets
 
 ### Update List widget
 
-1. Open the k17_list_widget using the widget editor
+1. Open the dd18_list_widget using the widget editor
 
 1. Modify the HTML template to look like this
 
 ```html
 <div class="panel panel-default">
-
-<!-- your widget template -->
-
-<div class="panel-heading">
-
-K17 List Widget
-
-</div>
-
-<div class="panel-body">
-
-<span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x
+    <!-- your widget template -->
+    <div class="panel-heading">
+        DD18 List Widget
+    </div>
+    <div class="panel-body">
+    <span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x
 fa-fw"></i>
-
-<span class="sr-only">Loading\...</span></span>
-
-<ul class="list-group">
-
-<li class="list-group-item" ng-repeat="item in c.data.list"
+        <span class="sr-only">
+            Loading\...
+        </span>
+    </span>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="item in c.data.list"
 ng-include="'task-category'"></li>
-
-</ul>
-
-</div>
-
+    </ul>
+    </div>
 </div>
 ```
 
 1. Click **Save**
 
 1. Navigate to [your instance]
-    .service-now.com/sp_config/?id=k17_list_widget and check your
-    results
+    .service-now.com/sp_config/?id=dd18_list_widget and check your results
 
     ![Widget](./media/image8.png
+
+1. Return to your HTML Template and change it to the task-priority template and reload.
 
 # Widget Options
 
@@ -381,24 +295,21 @@ In this lab we will define options for our widget
 
 1. Navigate to Service Portal > Widgets
 
-1. Open the k17_list_widget.
+1. Open the dd18_list_widget.
 
 1. Click on the lock icon next the **Fields** field
 
 1. Add the following fields:
 
 - Title
-
 - Bootstrap Color
 
 1. Click **Update**
 
 ### Modify list widget
 
-1. Open the k17_list_widget using the widget editor.
+1. Open the dd18_list_widget using the widget editor.
     NOTE: If you had the editor open, refresh it before continuing.
-
-<!-- -->
 
 1. Click on the ![Hamburger Menu](./media/image9.png) icon in the top right corner
 
@@ -412,11 +323,8 @@ In this lab we will define options for our widget
 1. Enter the following information
 
 - Label: Table
-
 - Name: table
-
 - Type: String
-
 - Default Value: incident
 
 1. Click on the ![Plus Icon](./media/image10.png) icon in the top right corner on of
@@ -425,11 +333,8 @@ In this lab we will define options for our widget
 1. Enter the following information
 
 - Label: Query
-
 - Name: query
-
 - Type:string
-
 - Default Value: leave empty
 
 1. Click on the ![Plus](./media/image10.png) icon in the top right corner on of
@@ -438,11 +343,8 @@ In this lab we will define options for our widget
 1. Enter the following information
 
 - Label: Template
-
 - Name: template
-
 - Type:string
-
 - Default Value: leave empty
 
 1. Click **Save**
@@ -451,27 +353,17 @@ In this lab we will define options for our widget
 
 ```javascript
 function($scope,$http) {
+    /*widget controller */
+    var c = this;
+    c.data.loading = true;
+    c.data.table = c.options.table || "incident";
+    c.data.query = c.options.query || "";
+    c.data.template = c.options.template || "task-category";
 
-/*widget controller */
-
-var c = this;
-
-c.data.loading = true;
-
-c.data.table = c.options.table || "incident";
-
-c.data.query = c.options.query || "";
-
-c.data.template = c.options.template || "task-category";
-
-$http.get('/api/now/table/'+c.data.table+'?sysparm_query='+c.data.query).success(function(response){
-
-c.data.loading=false;
-
-c.data.list = response.result;
-
-})
-
+    $http.get('/api/now/table/'+c.data.table+'?sysparm_query='+c.data.query).success(function(response){
+        c.data.loading=false;
+        c.data.list = response.result;
+    })
 }
 ```
 
@@ -479,38 +371,26 @@ c.data.list = response.result;
 
 ```html
 <div class="panel panel-{{c.options.color}}">
-
 <!-- your widget template -->
-
 <div class="panel-heading">
-
 {{c.options.title}}
-
 </div>
-
 <div class="panel-body">
-
 <span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x
 fa-fw"></i>
-
 <span class="sr-only">Loading\...</span></span>
-
 <ul class="list-group">
-
 <li class="list-group-item" ng-repeat="item in c.data.list"
 ng-include="c.data.template"></li>
-
 </ul>
-
 </div>
-
 </div>
 ```
 
 1. Click **Save**
 
 1. Navigate to [your instance]
-    .service-now.com/sp_config/?id=k17_list_widget
+    .service-now.com/sp_config/?id=dd18_list_widget
 
 1. Press **"Control" right click** on top of your widget
 
@@ -543,41 +423,26 @@ automatically updated without having to refresh the page
 
 ```javascript
 function($scope,$http,snRecordWatcher) {
+    /*widget controller */
+    var c = this;
+    c.data.loading = true;
+    c.data.table = c.options.table || "incident";
+    c.data.query = c.options.query || "";
+    c.data.template = c.options.template || "task-category";
 
-/*widget controller */
+    function getData(){
+        $http.get('/api/now/table/'+c.data.table+'?sysparm_query='+c.data.query).success(function(response){
+            c.data.loading=false;
+            c.data.list = response.result;
+        })
+    }
 
-var c = this;
+    getData();
 
-c.data.loading = true;
-
-c.data.table = c.options.table || "incident";
-
-c.data.query = c.options.query || "";
-
-c.data.template = c.options.template || "task-category";
-
-function getData(){
-
-$http.get('/api/now/table/'+c.data.table+'?sysparm_query='+c.data.query).success(function(response){
-
-c.data.loading=false;
-
-c.data.list = response.result;
-
-})
-
-}
-
-getData();
-
-snRecordWatcher.initList(c.data.table, c.data.query);
-
-$scope.$on('record.updated', function(name, data) {
-
-getData();
-
-});
-
+    snRecordWatcher.initList(c.data.table, c.data.query);
+    $scope.$on('record.updated', function(name, data) {
+        getData();
+    });
 }
 ```
 
@@ -590,15 +455,13 @@ getData();
 
 1. Open a new window and open a new critical priority change request.
 
-1. Go back to your widget window, is the new change request now
-    showing?
+1. Go back to your widget window, is the new change request now showing?
 
 # Broadcast Events
 
 ## Goal
 
-In this lab we will modify our widget to boradcast an event and have
-another widget receive that event.
+In this lab we will modify our widget to boradcast an event and have another widget receive that event.
 
 ### Set up event
 
@@ -608,43 +471,27 @@ another widget receive that event.
 
 ```javascript
 function($scope,$http,snRecordWatcher,$rootScope) {
+    /*widget controller */
+    var c = this;
+    c.data.loading = true;
+    c.data.table = c.options.table || "incident";
+    c.data.query = c.options.query || "";
+    c.data.template = c.options.template || "task-category";
 
-/*widget controller */
+    function getData(){
+        $http.get('/api/now/table/'+c.data.table+'?sysparm_query='+c.data.query).success(function(response){
+            c.data.loading=false;
+            c.data.list = response.result;
+            $rootScope.$broadcast("K17ListWidgetUpdated",c.data.list);
+        })
+    }
 
-var c = this;
+    getData();
+    snRecordWatcher.initList(c.data.table, c.data.query);
 
-c.data.loading = true;
-
-c.data.table = c.options.table || "incident";
-
-c.data.query = c.options.query || "";
-
-c.data.template = c.options.template || "task-category";
-
-function getData(){
-
-$http.get('/api/now/table/'+c.data.table+'?sysparm_query='+c.data.query).success(function(response){
-
-c.data.loading=false;
-
-c.data.list = response.result;
-
-**$rootScope.$broadcast("K17ListWidgetUpdated",c.data.list);**
-
-})
-
-}
-
-getData();
-
-snRecordWatcher.initList(c.data.table, c.data.query);
-
-$scope.$on('record.updated', function(name, data) {
-
-getData();
-
-});
-
+    $scope.$on('record.updated', function(name, data) {
+        getData();
+    });
 }
 ```
 
@@ -657,7 +504,6 @@ getData();
 1. Enter the following information:
 
 - Widget Name: k17_count_display_widget
-
 - Widget ID: k17_count_display_widget
 
 1. Click Submit
@@ -666,15 +512,10 @@ getData();
 
 ```html
 <div>
-
 <!-- your widget template -->
-
 <h2 class="jumbotron">
-
 Total Records:{{c.data.count}}
-
 </h2>
-
 </div>
 ```
 
@@ -682,21 +523,13 @@ Total Records:{{c.data.count}}
 
 ```javascript
 function($scope) {
-
-/*widget controller */
-
-var c = this;
-
-c.data.count = 0;
-
-$scope.$on("K17ListWidgetUpdated",function(evt,results){
-
-console.log(results)
-
-c.data.count = results.length;
-
-})
-
+    /*widget controller */
+    var c = this;
+    c.data.count = 0;
+    $scope.$on("K17ListWidgetUpdated",function(evt,results){
+        console.log(results)
+        c.data.count = results.length;
+    })
 }
 ```
 
@@ -719,5 +552,3 @@ c.data.count = results.length;
     .service-now.com/sp_config/?id=k17_list_widget
 
 1. Is the count of records populating?
-
-\
