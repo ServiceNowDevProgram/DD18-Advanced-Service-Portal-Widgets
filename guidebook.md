@@ -76,7 +76,7 @@ load data client side.
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="item in c.data.list">{{item.number}} - {{item.short_description}} - {{item.priority}}</li>
         </ul>
-<   /div>
+    </div>
 </div>
 ```
 
@@ -142,8 +142,7 @@ function($scope) {
     DD18 List Widget
     </div>
     <div class="panel-body">
-        <span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x
-fa-fw"></i>
+        <span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
         <span class="sr-only">Loading\...</span>
         </span>
         <ul class="list-group">
@@ -221,8 +220,7 @@ In this lab we create 2 ng templates to be used by our widgets
 - Template:
 
 ```html
-<span>{{item.number}} - {{item.short_description}} -
-{{item.priority}}</span>
+<span>{{item.number}} - {{item.short_description}} - {{item.priority}}</span>
 ```
 
 1. Click Submit
@@ -237,8 +235,7 @@ In this lab we create 2 ng templates to be used by our widgets
 - Template:
 
 ```html
-<span>{{item.number}} - {{item.short_description}} -
-{{item.category}}</span>
+<span>{{item.number}} - {{item.short_description}} - {{item.category}}</span>
 ```
 
 1. Click **Submit**
@@ -256,15 +253,13 @@ In this lab we create 2 ng templates to be used by our widgets
         DD18 List Widget
     </div>
     <div class="panel-body">
-    <span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x
-fa-fw"></i>
+    <span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
         <span class="sr-only">
             Loading\...
         </span>
     </span>
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="item in c.data.list"
-ng-include="'task-category'"></li>
+        <li class="list-group-item" ng-repeat="item in c.data.list" ng-include="'task-category'"></li>
     </ul>
     </div>
 </div>
@@ -365,19 +360,18 @@ function($scope,$http) {
 
 ```html
 <div class="panel panel-{{c.options.color}}">
-<!-- your widget template -->
-<div class="panel-heading">
-{{c.options.title}}
-</div>
-<div class="panel-body">
-<span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x
-fa-fw"></i>
-<span class="sr-only">Loading\...</span></span>
-<ul class="list-group">
-<li class="list-group-item" ng-repeat="item in c.data.list"
-ng-include="c.data.template"></li>
-</ul>
-</div>
+    <!-- your widget template -->
+    <div class="panel-heading">
+        {{c.options.title}}
+    </div>
+    <div class="panel-body">
+        <span ng-if="c.data.loading"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            <span class="sr-only">Loading\..</span>
+        </span>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in c.data.list" ng-include="c.data template"></li>
+        </ul>
+    </div>
 </div>
 ```
 
@@ -506,10 +500,10 @@ function($scope,$http,snRecordWatcher,$rootScope) {
 
 ```html
 <div>
-<!-- your widget template -->
-<h2 class="jumbotron">
-Total Records:{{c.data.count}}
-</h2>
+    <!-- your widget template -->
+    <h2 class="jumbotron">
+    Total Records:{{c.data.count}}
+    </h2>
 </div>
 ```
 
