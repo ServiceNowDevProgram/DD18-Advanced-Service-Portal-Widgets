@@ -1,17 +1,15 @@
-# Setup
-
-## Goal
+# Lab Goal
 
 In this lab we will create a list widget and then we will modify it to
 load data client side.
 
-### Log on to Your Training Instance
+## Log on to Your Training Instance
 
 1. Navigate to the unique instance URL provided to you.
 
 1. Log on with provided credentials.
 
-### Create List Widget
+## Create List Widget
 
 1. Navigate to Service Portal > Service Portal Configuration.
 
@@ -19,23 +17,21 @@ load data client side.
 
 1. Select **Create a new widget**
 
-[Create Widget](./media/image3.png)
-4.  Enter the following information:
+    ![Create Widget](./media/image3.png)
 
-- Widget Name: dd18_list_widget
+1. Enter the following information:
 
-- Widget ID: dd18_list_widget
-
-- Create Test Page: checked
-
-- Page Id: dd18_list_widget
+    - Widget Name: dd18_list_widget
+    - Widget ID: dd18_list_widget
+    - Create Test Page: checked
+    - Page Id: dd18_list_widget
 
 1. Click the **Submit** button.
 
 1. Your Screen should look like this
     ![Widget Editor](./media/image4.png)
 
-### Enter Widget Information
+## Enter Widget Information
 
 1. Enter the following information in the Server Script Window:
 
@@ -88,7 +84,7 @@ load data client side.
 
     ![Widget list view](./media/image5.png)
 
-### Load data client side
+## Load data client side
 
 1. Navigate back to the widget editor
 
@@ -160,11 +156,11 @@ function($scope) {
 
 # REST API
 
-## Goal
+# Lab Goal
 
 In this lab we will modify our list widget to make use of the REST API.
 
-### Modify List Widget
+## Modify List Widget
 
 1. Navigate to the widget editor and open the dd18_list_widget.
 
@@ -200,11 +196,11 @@ function($scope,$http) {
 
 # NG Template
 
-## Goal
+# Lab Goal
 
 In this lab we create 2 ng templates to be used by our widgets
 
-### Create Templates
+## Create Templates
 
 1. Navigate to Service Portal > Widgets
 
@@ -216,8 +212,8 @@ In this lab we create 2 ng templates to be used by our widgets
 
 1. Enter the following information
 
-- ID: task-priority
-- Template:
+    - ID: task-priority
+    - Template:
 
 ```html
 <span>{{item.number}} - {{item.short_description}} - {{item.priority}}</span>
@@ -231,8 +227,8 @@ In this lab we create 2 ng templates to be used by our widgets
 
 1. Enter the following information
 
-- ID: task-category
-- Template:
+    - ID: task-category
+    - Template:
 
 ```html
 <span>{{item.number}} - {{item.short_description}} - {{item.category}}</span>
@@ -240,7 +236,7 @@ In this lab we create 2 ng templates to be used by our widgets
 
 1. Click **Submit**
 
-### Update List widget
+## Update List widget
 
 1. Open the dd18_list_widget using the widget editor
 
@@ -276,11 +272,11 @@ In this lab we create 2 ng templates to be used by our widgets
 
 # Widget Options
 
-## Goal
+# Lab Goal
 
 In this lab we will define options for our widget
 
-### Add out of box options
+## Add out of box options
 
 1. Navigate to Service Portal > Widgets
 
@@ -290,12 +286,12 @@ In this lab we will define options for our widget
 
 1. Add the following fields:
 
-- Title
-- Bootstrap Color
+    - Title
+    - Bootstrap Color
 
 1. Click **Update**
 
-### Modify list widget
+## Modify list widget
 
 1. Open the dd18_list_widget using the widget editor.
     NOTE: If you had the editor open, refresh it before continuing.
@@ -311,30 +307,30 @@ In this lab we will define options for our widget
 
 1. Enter the following information
 
-- Label: Table
-- Name: table
-- Type: String
-- Default Value: incident
+    - Label: Table
+    - Name: table
+    - Type: String
+    - Default Value: incident
 
 1. Click on the ![Plus Icon](./media/image10.png) icon in the top right corner on of
     the modal window
 
 1. Enter the following information
 
-- Label: Query
-- Name: query
-- Type: String
-- Default Value: leave empty
+    - Label: Query
+    - Name: query
+    - Type: String
+    - Default Value: leave empty
 
 1. Click on the ![Plus](./media/image10.png) icon in the top right corner on of
     the modal window
 
 1. Enter the following information
 
-- Label: Template
-- Name: template
-- Type: String
-- Default Value: leave empty
+    - Label: Template
+    - Name: template
+    - Type: String
+    - Default Value: leave empty
 
 1. Click **Save**
 
@@ -384,26 +380,26 @@ function($scope,$http) {
 
 1. Select Instance Options
 
-![dd18_list_widget generated](./media/image12.png)
+    ![dd18_list_widget generated](./media/image12.png)
 
 1. Enter the following information
 
-![dd18 List Widget](./media/image13.png)
+    ![dd18 List Widget](./media/image13.png)
 
 1. Click **Save**
 
 1. Check your results
 
-![Results](./media/image14.png)
+    ![Results](./media/image14.png)
 
 # Record Watchers
 
-## Goal
+# Lab Goal
 
 In this lab we will create a record watcher so our widget is
 automatically updated without having to refresh the page
 
-### Set up record watcher
+## Set up record watcher
 
 1. Open the dd18_list_widget using the widget editor.
 
@@ -447,11 +443,11 @@ function($scope,$http,snRecordWatcher) {
 
 # Broadcast Events
 
-## Goal
+# Lab Goal
 
 In this lab we will modify our widget to broadcast an event and have another widget receive that event.
 
-### Set up event
+## Set up event
 
 1. Open the dd18_list_widget using the widget editor.
 
@@ -491,8 +487,8 @@ function($scope,$http,snRecordWatcher,$rootScope) {
 
 1. Enter the following information:
 
-- Widget Name: dd18_count_display_widget
-- Widget ID: dd18_count_display_widget
+    - Widget Name: dd18_count_display_widget
+    - Widget ID: dd18_count_display_widget
 
 1. Click Submit
 
